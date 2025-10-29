@@ -48,7 +48,7 @@ bool sum_and_compare(double a, double b, double expected, double epsilon = 1e-10
     return absError < epsilon;
 }
 
-void sum_loop_example(int iterations = 100) {
+void sum_loop_example_double(int iterations = 100) {
     double suma = 0.0;
     double oczekiwanaWartosc = 0.1 * iterations;
 
@@ -61,6 +61,21 @@ void sum_loop_example(int iterations = 100) {
             << ", ró¿nica = " << roznica << std::endl;
     }
 }
+
+void sum_loop_example_float(int iterations = 100) {
+    float suma = 0.0;
+    float oczekiwanaWartosc = 0.1 * iterations;
+
+    std::cout << "\n--- Pêtla sumowania 0.1 " << iterations << " razy ---\n";
+    for (int i = 0; i < iterations; i++) {
+        suma += 0.1;
+        double roznica = std::abs(suma - 0.1 * (i + 1));
+        std::cout << "Iteracja " << i + 1 << ": suma = " << std::setprecision(20) << suma
+            << ", oczekiwana = " << 0.1 * (i + 1)
+            << ", ró¿nica = " << roznica << std::endl;
+    }
+}
+
 
 double eval(const std::vector<double>& nums) {
     double sum = 0.0;
@@ -149,6 +164,8 @@ int main()
     std::cout << "Min : " << -std::numeric_limits<long double>::max() << "\n";
     std::cout << "Max: " << std::numeric_limits<long double>::max() << "\n";
 
+    //sum_loop_example_double();
+    sum_loop_example_float();
 
 
     std::ofstream file("results.csv");
